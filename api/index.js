@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("../config/config");
+const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -41,6 +42,10 @@ app.use(
       secure: true
     },
     resave: false,
+    store: MongoStore.create({
+      mongoUrl: config.mongoUri,
+      mongoOptions: config.mongoOptions
+    })
   })
 );
 
