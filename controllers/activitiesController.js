@@ -33,54 +33,30 @@ const addActivity = async (req, res, next) => {
     owner: user.user_id,
     ...req.body,
   });
-  const validiateResult = activity.validateSync();
-  if (validiateResult) {
-    return res.status(400).send(validiateResult);
+
+  const validateResult = activity.validateSync();
+  if (validateResult) {
+    return res.status(400).send(validateResult);
   }
+  
   await activity.save();
   return res.send(activity);
 };
 
 const editActivity = async (req, res, next) => {
-  // if (!ObjectId.isValid(req.params.activityId)){
-  //     return res.status(400).send()
-  //  }; //true
-  // const activity = await Activities.findById(req.params.activityId)
-  // if (!activity) {
-  //      return res.status(404).send();
-  // }
-  // req.activity = activity
-
   const { activity_type, activity_name, date, duration, comment } = req.body;
-  if (activity_type) {
-    req.activity.activity_type = activity_type;
-  }
-  if (activity_name) {
-    req.activity.activity_name = activity_name;
-  }
-  if (date) {
-    req.activity.date = date;
-  }
-  if (duration) {
-    req.activity.duration = duration;
-  }
-  if (comment) {
-    req.activity.comment = comment;
-  }
+
+  if (activity_type) req.activity.activity_type = activity_type;
+  if (activity_name) req.activity.activity_name = activity_name;
+  if (date) req.activity.date = date;
+  if (duration) req.activity.duration = duration;
+  if (comment) req.activity.comment = comment;
+
   await req.activity.save();
   res.send(req.activity);
 };
 
 const removeActivity = async (req, res, next) => {
-  // if (!ObjectId.isValid(req.params.activityId)){
-  //     return res.status(400).send()
-  //  }; //true
-  // const activity = await Activities.findById(req.params.activityId)
-  // if (!activity) {
-  //      return res.status(404).send();
-  // }
-  // req.activity = activity
-
   await req.activity.remove();
   res.status(204).send();
 };

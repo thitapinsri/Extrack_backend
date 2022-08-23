@@ -1,17 +1,25 @@
-const express = require('express');
+const config = require("./config/config");
+const mongoose = require("mongoose");
+const express = require("express");
 const app = express();
-require('dotenv').config();
-const mongoose = require('mongoose');
-const config = require('./config/config');
 
-const cors = require('cors');
-app.use(cors({ 
-  credentials: true,
-  origin: 'http://localhost:5173'
-}));
+// cors
+const cors = require("cors");
+app.use(
+  cors({
+    credentials: true,
+    origin: config.client_port || "http://localhost:5173",
+  })
+);
 
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// json
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// cookie
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 app.use(cookieParser());
 
 const oneDay = 1000 * 60 * 60 * 24;
@@ -24,41 +32,34 @@ app.use(
   })
 );
 
-const bodyParser = require('body-parser');
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
+// connect to database
 app.use(async (req, res, next) => {
-    try {
-      await mongoose.connect(config.mongodb.uri, {
-        user: config.mongodb.username,  
-        pass: config.mongodb.password,
-        retryWrites: true,
-      })
-      next();
-    } catch (error) {
-      console.log(error);
-      res.status(500).send();
-    }
-  });
-
-
-app.get('/',(req,res,next) => {
-    res.send('hello world');
+  try {
+    await mongoose.connect(config.mongodb.uri, {
+      user: config.mongodb.username,
+      pass: config.mongodb.password,
+      retryWrites: true,
+    });
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send();
+  }
 });
 
-const authRoutes = require('./routes/authRoute');
-app.use('/auth', authRoutes);
+// api test
+app.get("/", (req, res, next) => {
+  res.send("connected");
+});
 
-// const activityRoutes = require('./routes/activitiesRoute');
-// app.use('/activities', activityRoutes);
-//  /user/activities
-const userRoutes = require('./routes/userRoute');
-app.use('/user', userRoutes);
+//routes
+const authRoutes = require("./routes/authRoute");
+app.use("/auth", authRoutes);
 
-PORT = config.port;
+const userRoutes = require("./routes/userRoute");
+app.use("/user", userRoutes);
 
-app.listen(PORT, () => {
-    console.log('listening on port ' + PORT);
-    // console.log(config.mongodb.uri)
+// start listening
+app.listen(config.port, () => {
+  console.log("listening on port " + config.port);
 });

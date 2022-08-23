@@ -15,10 +15,6 @@ const activitiesSchema = new mongoose.Schema({
     },
     activity_name: {
         type: String,
-        // enum: {
-        //     values: ['run','bicycle','ride','swim','walk','hike','strength training'],
-        //     message: 'activity_name\'s value is not supported'
-        // },
         required: true,
     },
     date: {

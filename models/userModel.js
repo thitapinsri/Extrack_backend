@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema({
     required: true
    },
    date_of_birth:{
-    type: Date,
-    // required: true
+    type: Date
    },
    inspiration: {
     type: String
@@ -42,10 +41,16 @@ const userSchema = new mongoose.Schema({
    goal_weight: {
     type: Number ,
     default: 0
-    // required: true
    },
    weekly_goal: {
     type: Number,
+    default: 0
+   },
+   profile_picture: {
+    type: Number,
+    enum: {
+        values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
     default: 0
    }
 
