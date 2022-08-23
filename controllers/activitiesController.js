@@ -88,8 +88,7 @@ const getDailyStat = async (req, res, next) => {
       },
     },
   ]);
-  console.log(dailyStat)
-  res.send(dailyStat);
+  res.send(req.user.user_id);
 };
 
 
