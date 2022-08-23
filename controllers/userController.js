@@ -55,7 +55,7 @@ const editGoal = async (req,res,next) => {
     if (goal_weight) user.goal_weight = goal_weight
     if (inspiration) user.goal_inspiration = inspiration
 
-    await req.user.save()
+    await user.save()
     res.send(
         req.user._id,
         req.user.user_id,
@@ -70,6 +70,7 @@ const allUsername = async (req,res,next) => {
     const usernames = await User.find({},{ user_id: 1, name: 1 })
     res.send(usernames)
 }
+
 module.exports = {
     getUserById,
     createUser,
