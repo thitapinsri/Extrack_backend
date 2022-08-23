@@ -18,11 +18,11 @@ activityRoutes.param('activityId', async (req,res,next, id) => {
 });
 
 activityRoutes.get('/', activitiesController.getAllActivities);
+activityRoutes.get('/daily-stats', activitiesController.getDailyStat);
 activityRoutes.get('/:activityId', activitiesController.getActivityById);
 activityRoutes.post('/', activitiesController.addActivity);
 activityRoutes.patch('/:activityId', activitiesController.editActivity);
 activityRoutes.delete('/:activityId', activitiesController.removeActivity);
-activityRoutes.get('/daily-stats', activitiesController.getDailyStat);
 
 module.exports = activityRoutes;
 

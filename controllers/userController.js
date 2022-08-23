@@ -56,7 +56,7 @@ const editGoal = async (req, res, next) => {
 
   if (weekly_goal) user.weekly_goal = weekly_goal;
   if (goal_weight) user.goal_weight = goal_weight;
-  if (inspiration) user.goal_inspiration = inspiration;
+  if (inspiration) user.inspiration = inspiration;
 
   await user.save();
   res.send(
