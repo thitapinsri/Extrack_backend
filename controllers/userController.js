@@ -11,6 +11,7 @@ const createUser = async (req, res, next) => {
         ...req.body
     });
     await newUser.save();
+    req.session.user_id = newUser.user_id;
     res.send("Register success");
   } catch (err) {
     res.send(err);
