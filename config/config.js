@@ -1,12 +1,15 @@
-require('dotenv').config()
+require("dotenv").config();
 // console.log(process.env)
 const config = {
-    port: process.env.PORT || 3000,
-    mongodb: {
-        uri: process.env.MONGODB_URI,
-        username: process.env.MONGODB_USERNAME,
-        password: process.env.MONGODB_PASSWORD,
-    },
-    client_port: process.env.CLIENT_PORT
-}
-module.exports = config
+  port: process.env.PORT || 3000,
+  mongoUri: process.env.MONGODB_URI,
+  mongoOptions: {
+    user: process.env.MONGODB_USERNAME,
+    pass: process.env.MONGODB_PASSWORD,
+    retryWrites: true,
+    w: "majority",
+  },
+  clientPort: process.env.CLIENT_PORT,
+  isVercel: process.env.IS_VERCEL || false
+};
+module.exports = config;
