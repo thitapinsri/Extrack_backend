@@ -39,19 +39,16 @@ const userSchema = new mongoose.Schema({
     type: String
    },
    goal_weight: {
-    type: Number ,
-    default: 0
+    type: Number
    },
    weekly_goal: {
-    type: Number,
-    default: 0
+    type: Number
    },
    profile_picture: {
     type: Number,
     enum: {
         values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    },
-    default: 0
+    }
    }
 
 });
