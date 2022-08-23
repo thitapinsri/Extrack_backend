@@ -65,7 +65,7 @@ const getDailyStat = async (req, res, next) => {
   const dailyStat = await Activities.aggregate([
     {
       $match: {
-        owner: req.user.user_id,
+        owner: req.session.user_id,
       },
     },
     {
@@ -88,7 +88,8 @@ const getDailyStat = async (req, res, next) => {
       },
     },
   ]);
-  res.send(req.user.user_id);
+  console.log(dailyStat)
+  res.send(dailyStat);
 };
 
 
