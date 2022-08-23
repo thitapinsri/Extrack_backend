@@ -35,7 +35,11 @@ app.use(
   session({
     secret: "wertyui;,lkjhgtyukhlkhl",
     saveUninitialized: true,
-    cookie: { maxAge: oneDay },
+    cookie: { 
+      maxAge: oneDay,
+      sameSite: true,
+      secure: true
+    },
     resave: false,
   })
 );
