@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const config = require("../config/config");
 const MongoStore = require('connect-mongo');
+require("dotenv").config();
+
 
 const app = express();
 
 if (config.isVercel) {
     app.use(async (req, res, next) => {
-      await mongoose.connect(config.mongoUri);
+      await mongoose.connect(process.env.MONGODB_URI);
       return next();
     });
   }
@@ -43,7 +45,7 @@ app.use(
     },
     resave: false,
     store: MongoStore.create({
-      mongoUrl: config.mongoUri
+      mongoUrl: process.env.MONGODB_URI
     })
   })
 );
