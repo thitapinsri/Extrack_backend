@@ -21,7 +21,7 @@ const cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: config.clientPort,
+    origin: ['https://extract-frontend-mu.vercel.app'],
   })
 );
 
