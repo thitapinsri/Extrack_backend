@@ -7,7 +7,7 @@ const app = express();
 
 if (config.isVercel) {
     app.use(async (req, res, next) => {
-      await mongoose.connect(config.mongoUri, config.mongoOptions);
+      await mongoose.connect(config.mongoUri);
       return next();
     });
   }
@@ -43,8 +43,7 @@ app.use(
     },
     resave: false,
     store: MongoStore.create({
-      mongoUrl: config.mongoUri,
-      mongoOptions: config.mongoOptions
+      mongoUrl: config.mongoUri
     })
   })
 );
