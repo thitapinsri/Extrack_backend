@@ -37,11 +37,12 @@ const oneDay = 1000 * 60 * 60 * 24;
 app.use(
   session({
     secret: "wertyui;,lkjhgtyukhlkhl",
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { 
       maxAge: oneDay,
       sameSite: 'none',
-      secure: true
+      secure: true,
+      httpOnly: true
     },
     resave: false,
     store: MongoStore.create({
