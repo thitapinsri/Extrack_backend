@@ -6,7 +6,7 @@ const config = require("./config/config");
 const boot = async () => {
   // connect to database
   // try {
-    await mongoose.connect(config.mongoUri, config.mongoOptions);
+    await mongoose.connect(config.mongoUri);
   // } catch (error) {
   //   console.log(error);
   //   res.status(500).send();
