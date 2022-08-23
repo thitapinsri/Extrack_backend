@@ -21,7 +21,7 @@ const cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: config.clientPort || "http://localhost:5173",
+    origin: config.clientPort,
   })
 );
 
@@ -33,7 +33,7 @@ app.use(cookieParser());
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(
   session({
-    secret: "key",
+    secret: "wertyui;,lkjhgtyukhlkhl",
     saveUninitialized: true,
     cookie: { maxAge: oneDay },
     resave: false,
