@@ -26,7 +26,7 @@ const signIn = async (req,res, next) => {
             }
         });
     } else {
-        res.status(401).send('Username or Email is not mathch')
+        res.status(401).send('Username or Email is not match')
 
     }
     

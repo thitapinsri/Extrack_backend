@@ -17,7 +17,7 @@ app.use(cookieParser());
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(
   session({
-    secret: "asdjfklasdjklfjasldkjflkjlkasjlkfjldkasjflkajlskdf",
+    secret: "key",
     saveUninitialized: true,
     cookie: { maxAge: oneDay },
     resave: false,

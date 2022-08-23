@@ -13,6 +13,7 @@ userRoute.use('/activities',activitiesRoute);
 // userRoute.get('/', userController.allUsers);
 userRoute.get('/me', userController.getUserById);
 userRoute.patch('/me', userController.editUser);
+userRoute.patch('/goal', userController.editGoal);
 
 
 

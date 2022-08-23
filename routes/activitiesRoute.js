@@ -17,7 +17,7 @@ activityRoutes.param('activityId', async (req,res,next, id) => {
 });
 
 activityRoutes.get('/', activitiesController.getAllActivities);
-activityRoutes.get('/summary', activitiesController.getSummary);
+activityRoutes.get('/daily-stats', activitiesController.getDailyStat);
 activityRoutes.get('/:activityId', activitiesController.getActivityById);
 activityRoutes.post('/', activitiesController.addActivity);
 activityRoutes.patch('/:activityId', activitiesController.editActivity);

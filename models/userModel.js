@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true
    },
+   date_of_birth:{
+    type: Date,
+    // required: true
+   },
    inspiration: {
     type: String
    },
