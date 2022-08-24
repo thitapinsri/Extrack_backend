@@ -24,7 +24,12 @@ const cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: ['https://extract-frontend-mu.vercel.app', 'http://localhost:5173', 'https://extract-frontend-two.vercel.app'],
+    origin: [
+      'https://extract-frontend-mu.vercel.app',
+      'http://localhost:5173',
+      'https://extract-frontend-two.vercel.app',
+      'https://extracts.vercel.app'
+    ],
   })
 );
 
