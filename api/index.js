@@ -9,7 +9,7 @@ const app = express();
 
 if (config.isVercel) {
     app.use(async (req, res, next) => {
-      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connect(config.mongoUri);
       return next();
     });
   }
@@ -24,12 +24,7 @@ const cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: [
-      'https://extract-frontend-mu.vercel.app',
-      'http://localhost:5173',
-      'https://extract-frontend-two.vercel.app',
-      'https://extracts.vercel.app'
-    ],
+    origin: config.clientPorts,
   })
 );
 
@@ -37,23 +32,22 @@ app.use(
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 app.use(cookieParser());
-
 app.set("trust proxy", 1);
 
-const oneDay = 1000 * 60 * 60 * 24;
+// session
 app.use(
   session({
-    secret: "wertyui;,lkjhgtyukhlkhl",
+    secret: config.secret,
     saveUninitialized: false,
     cookie: { 
-      maxAge: oneDay,
+      maxAge: config.oneDay,
       sameSite: 'none',
       secure: true,
       httpOnly: true
     },
     resave: false,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI
+      mongoUrl: config.mongoUri
     })
   })
 );
