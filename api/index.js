@@ -24,7 +24,11 @@ const cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: config.clientPorts,
+    origin: [
+      'http://localhost:5173',
+      'https://extracts.vercel.app',
+      'https://extracks.vercel.app'
+    ],
   })
 );
 
