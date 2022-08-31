@@ -33,7 +33,7 @@ const editUser = async (req, res, next) => {
   if (!user) {
     return res.status(404).send();
   }
-  const { username, password, name, email, height, weight, date_of_birth } = req.body;
+  const { username, password, name, email, height, weight, date_of_birth, weekly_goal, goal_weight, inspiration } = req.body;
 
   if (name) user.name = name;
   if (username) user.username = username;
@@ -43,9 +43,14 @@ const editUser = async (req, res, next) => {
   if (weight) user.weight = weight;
   if (height) user.height = height;
 
+  if (weekly_goal) user.weekly_goal = weekly_goal;
+  if (goal_weight) user.goal_weight = goal_weight;
+  if (inspiration) user.inspiration = inspiration;
+
   await user.save();
   res.send(user);
 };
+
 // for setting goal
 const editGoal = async (req, res, next) => {
   const user = await User.findOne({ user_id: req.user.user_id });
